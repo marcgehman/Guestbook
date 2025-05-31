@@ -1,0 +1,45 @@
+version: "3.9"
+
+# Docker Compose for our Guestbook Application
+#  1. DynamoDB
+#  2. Backend - Python Server
+#  3. Frontend -React Application
+
+services:
+  # Database
+  dynamodb:
+    image: amazon/dynamodb-local
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+  # Python Backend
+  backend:
+    build:
+      context: ./backend
+    container_name: guestbook-backend
+    ports:
+      - "8001:8000"
+    environment:
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy
+      - DYNAMODB_ENDPOINT=http://dynamodb:8000
+    depends_on:
+      - dynamodb
+    volumes:
+      - ./backend:/app  # Mount local code for live reload if needed
+
+  # React Frontend
+  frontend:
+    container_name: guestbook-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: sh -c "npm install && npm run dev"
+    depends_on:
+      - backend

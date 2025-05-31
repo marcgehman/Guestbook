@@ -1,0 +1,45 @@
+# Node.js (frontend)
+node_modules/
+dist/
+build/
+*.log
+.npmrc
+.env.local
+.vite/
+
+# Python (backend)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.env
+db.sqlite3
+
+# Docker
+*.pid
+*.seed
+*.bak
+*.tar
+*.img
+
+# Logs & temp files
+*.log
+*.tmp
+*.swp
+*.DS_Store
+Thumbs.db
+
+# OS & editor metadata
+.vscode/
+
+# Testing
+.coverage
+.cache/
+pytest_cache/
+*.cover
+htmlcov/
+
+# System
+.DS_Store
+ehthumbs.db
+Icon?
