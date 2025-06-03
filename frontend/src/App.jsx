@@ -42,27 +42,11 @@ const submit = async () => {
 };
 
 return (
+  <>
+  <div className="header-bar">Marc’s Guestbook</div>
   <div className="app-container">
-    <div className="left-panel">
-      <h1>{TITLE}</h1>
-      <input
-        placeholder="Name"
-        value={form.name}
-        onChange={(e) => setForm({ ...form, name: e.target.value })}
-      />
-      <input
-        placeholder="Company"
-        value={form.company}
-        onChange={(e) => setForm({ ...form, company: e.target.value })}
-      />
-      <textarea
-        placeholder="Leave a message..."
-        value={form.message}
-        onChange={(e) => setForm({ ...form, message: e.target.value })}
-      />
-      <button onClick={submit}>Submit</button>
-      <hr />
-      <h2>Guestbook</h2>
+    <div className="card left-panel">
+      <h2>Visitor Log</h2>
       <table>
         <thead>
           <tr>
@@ -86,13 +70,33 @@ return (
             ))}
         </tbody>
       </table>
+      <hr />
+      <h2>Leave a Message!</h2>
+      <input
+        placeholder="Name"
+        value={form.name}
+        onChange={(e) => setForm({ ...form, name: e.target.value })}
+      />
+      <input
+        placeholder="Company"
+        value={form.company}
+        onChange={(e) => setForm({ ...form, company: e.target.value })}
+      />
+      <textarea
+        placeholder="Message..."
+        value={form.message}
+        onChange={(e) => setForm({ ...form, message: e.target.value })}
+      />
+      <button onClick={submit}>Submit</button>
+
     </div>
 
-    <div className="right-panel">
+    <div className="card right-panel">
       <MapPanel entries={messages} />
       <StatsPanel entries={messages} />
     </div>
   </div>
+  </>
 );
 }
 

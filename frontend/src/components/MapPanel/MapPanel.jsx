@@ -6,8 +6,8 @@ function MapPanel({ entries }) {
   return (
     <div className="map-container">
       <MapContainer
-        center={[20, 0]}
-        zoom={2}
+        center={[37.8, -96]}
+        zoom={4}
         scrollWheelZoom={true}
         style={{ height: "400px", width: "100%" }}
         whenCreated={(mapInstance) => {
