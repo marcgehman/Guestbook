@@ -1,0 +1,26 @@
+// Docker Compose config for testing Lambda functions with DynamoDB Local.
+version: "3.9"
+
+services:
+  lambda-test:
+    build:
+      context: ./backend
+    container_name: guestbook-backend-lambda
+    working_dir: /app
+    entrypoint: ["sh", "-c", "python app/create_tables.py && python app/simulate_lambda.py"]
+
+    volumes:
+      - ./backend:/app
+    environment:
+      PYTHONPATH: /app
+      AWS_ACCESS_KEY_ID: dummy
+      AWS_SECRET_ACCESS_KEY: dummy
+      DYNAMODB_ENDPOINT: http://dynamodb:8000
+    depends_on:
+      - dynamodb
+
+  dynamodb:
+    image: amazon/dynamodb-local
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
