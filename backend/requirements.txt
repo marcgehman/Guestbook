@@ -1,5 +1,6 @@
 fastapi
-uvicorn
-boto3
-pydantic
+uvicorn # ASGI server for FastAPI
+boto3 # For AWS services integration
+pydantic 
 requests
+mangum # For AWS Lambda compatibility

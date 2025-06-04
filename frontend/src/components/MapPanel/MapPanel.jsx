@@ -18,22 +18,22 @@ function MapPanel({ entries }) {
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {entries.map((entry) => {
-          const [city, country] = (entry.location || "").split(", ");
-          const coords = locationToLatLng(city, country);
-          return (
-            coords && (
-              <Marker key={entry.id} position={coords}>
+          const { latitude, longitude } = entry;
+          if (latitude && longitude) {
+            return (
+              <Marker key={entry.id} position={[latitude, longitude]}>
                 <Popup>
                   <strong>{entry.name}</strong>
                   <br />
-                  {city}, {country}
+                  {entry.location}
                   <br />
                   {new Date(entry.timestamp).toLocaleDateString()}
                 </Popup>
               </Marker>
-            )
-          );
-        })}
+            );
+          }
+          return null;
+      })}
       </MapContainer>
     </div>
   );
@@ -41,11 +41,15 @@ function MapPanel({ entries }) {
 
 // Fake lookup for now
 const lookup = {
-  "Philadelphia, United States": [39.9526, -75.1652],
+  "Philadelphia, Pennsylvania, United States": [39.9526, -75.1652],
+  "New York, New York, United States": [40.7128, -74.0060],
+  "Los Angeles, California, United States": [34.0522, -118.2437],
+  // add more as needed
 };
 
-function locationToLatLng(city, country) {
-  return lookup[`${city}, ${country}`] || null;
+function locationToLatLng(city, state, country) {
+  const key = `${city}, ${state}, ${country}`;
+  return lookup[key] || null;
 }
 
 export default MapPanel;

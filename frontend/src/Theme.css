@@ -112,7 +112,6 @@ textarea {
 /*           Table Styles            */
 table {
   width: 100%;
-
   overflow: hidden;
 
 }
@@ -122,9 +121,11 @@ td {
   padding: 0.5rem;
 }
 
-tr:nth-child(even) {
+tr:nth-child(odd) {
   background-color: var(--row-alt-bg);
 }
 
-
+th {
+  background-color: var(--color-surface);
+}
 

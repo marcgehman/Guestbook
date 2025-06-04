@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .db import save_message, list_messages
 from pydantic import BaseModel
 from typing import Optional
+from mangum import Mangum
 
 app = FastAPI()
 
@@ -30,3 +31,7 @@ async def submit_message(form: MessageForm, request: Request):
     forwarded = request.headers.get("x-forwarded-for")
     client_ip = forwarded.split(",")[0] if forwarded else request.client.host
     return save_message(form.name, form.company, form.message, form.ip)
+
+
+
+handler = Mangum(app)

@@ -4,8 +4,6 @@ import axios from "axios";
 import MapPanel from "./components/MapPanel/MapPanel";
 import StatsPanel from "./components/StatsPanel/StatsPanel";
 
-
-// Environment Variables
 const API = import.meta.env.VITE_API_URL;
 const TITLE = import.meta.env.VITE_API_TITLE;
 
@@ -43,62 +41,66 @@ const submit = async () => {
 
 return (
   <>
-  <div className="header-bar">Marc’s Guestbook</div>
-  <div className="app-container">
-    <div className="card left-panel">
-      <h2>Visitor Log</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Company</th>
-            <th>Message</th>
-            <th>Date</th>
-            <th>Location</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.isArray(messages) &&
-            messages.map((msg) => (
-              <tr key={msg.id}>
-                <td>{msg.name}</td>
-                <td>{msg.company}</td>
-                <td>{msg.message}</td>
-                <td>{new Date(msg.timestamp).toLocaleDateString()}</td>
-                <td>{msg.location}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-      <hr />
-      <h2>Leave a Message!</h2>
-      <input
-        placeholder="Name"
-        value={form.name}
-        onChange={(e) => setForm({ ...form, name: e.target.value })}
-      />
-      <input
-        placeholder="Company"
-        value={form.company}
-        onChange={(e) => setForm({ ...form, company: e.target.value })}
-      />
-      <textarea
-        placeholder="Message..."
-        value={form.message}
-        onChange={(e) => setForm({ ...form, message: e.target.value })}
-      />
-      <button onClick={submit}>Submit</button>
+    <div className="header-bar">Marc’s Guestbook</div>
 
-    </div>
-
-    <div className="card right-panel">
+    <div className="map-panel card">
       <MapPanel entries={messages} />
-      <StatsPanel entries={messages} />
     </div>
-  </div>
+
+    <div className="app-container">
+      <div className="card left-panel">
+        <h2>Visitor Log</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Company</th>
+              <th>Message</th>
+              <th>Date</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Array.isArray(messages) &&
+              messages.map((msg) => (
+                <tr key={msg.id}>
+                  <td>{msg.name}</td>
+                  <td>{msg.company}</td>
+                  <td>{msg.message}</td>
+                  <td>{new Date(msg.timestamp).toLocaleDateString()}</td>
+                  <td>{msg.location}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+        <hr />
+        <h2>Leave a Message!</h2>
+        <input
+          placeholder="Name"
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+        />
+        <input
+          placeholder="Company"
+          value={form.company}
+          onChange={(e) => setForm({ ...form, company: e.target.value })}
+        />
+        <textarea
+          placeholder="Message..."
+          value={form.message}
+          onChange={(e) => setForm({ ...form, message: e.target.value })}
+        />
+        <button onClick={submit}>Submit</button>
+      </div>
+
+      <div className="card right-panel">
+        <StatsPanel entries={messages} />
+      </div>
+    </div>
   </>
 );
 }
 
 export default App;
+
 

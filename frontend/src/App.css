@@ -67,7 +67,9 @@ h2 {
   flex: 1;
 }
 
-
+.map-panel {
+  margin-bottom: 2rem;
+}
 
 
 /* Responsive stacking under 900px */
