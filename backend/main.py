@@ -1,9 +1,15 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from .db import save_message, list_messages
+from app.db import save_message, list_messages
 from pydantic import BaseModel
 from typing import Optional
 from mangum import Mangum
+import logging
+
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
 
 app = FastAPI()
 
@@ -23,6 +29,7 @@ class MessageForm(BaseModel):
 
 @app.get("/messages")
 def get_messages():
+    logger.info("Fetching messages")
     return list_messages()
 
 @app.post("/submit")
