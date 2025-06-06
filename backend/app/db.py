@@ -7,10 +7,7 @@ from decimal import Decimal
 
 dynamodb = boto3.resource(
     'dynamodb',
-    region_name='us-west-2',
-    endpoint_url=os.getenv('DYNAMODB_ENDPOINT', 'http://localhost:8000'),
-    aws_access_key_id='dummy',
-    aws_secret_access_key='dummy'
+    region_name='us-east-2'
 )
 
 def get_table():
