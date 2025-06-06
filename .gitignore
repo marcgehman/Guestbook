@@ -43,3 +43,17 @@ htmlcov/
 .DS_Store
 ehthumbs.db
 Icon?
+
+# Terraform state
+terraform.tfstate
+terraform.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Sensitive configuration
+terraform.tfvars
+terraform.auto.tfvars
+
+# Build artifacts
+*.zip
+backend/build/
