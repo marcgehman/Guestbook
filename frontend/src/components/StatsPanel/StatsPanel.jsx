@@ -24,6 +24,7 @@ function StatsPanel({ entries }) {
     state,
     count,
   }));
+  const sortedChartData = [...chartData].sort((a, b) => b.count - a.count);
 
 
   /* 
@@ -58,7 +59,7 @@ function StatsPanel({ entries }) {
           <div className="kpi-card">
             <span className="kpi-label">Most Active State</span>
             <span className="kpi-value">
-              {chartData.length > 0 ? chartData[0].state : "—"}
+              {sortedChartData.length > 0 ? sortedChartData[0].state : "—"}
             </span>
           </div>
           <div className="kpi-card">

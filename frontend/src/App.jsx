@@ -15,27 +15,33 @@ function App() {
 
   useEffect(() => {
     axios.get(`${API}/messages`).then((res) => {
-      setMessages(res.data);
+      
+      const sorted = res.data.sort((a, b) => {
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      });
+
+      setMessages(sorted);
     });
   }, []);
 
 const submit = async () => {
   try {
-    // Get real client IP from ipify
     const ipRes = await axios.get("https://api.ipify.org?format=json");
     const userIP = ipRes.data.ip;
 
-    // Submit with IP
     await axios.post(`${API}/submit`, {
       ...form,
       ip: userIP,
     });
 
     const res = await axios.get(`${API}/messages`);
-    setMessages(res.data);
+
+    const sorted = res.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+    setMessages(sorted);
     setForm({ name: "", company: "", message: "" });
   } catch (err) {
-    console.error("Error submitting message:", err);
+    console.error("Error submitting message:", err.response?.data || err.message);
   }
 };
 
