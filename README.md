@@ -6,7 +6,7 @@ Guestbook is a web app where visitors can leave a message with their name and co
 
 ## Project Highlights
 
--  **Serverless** — Powered entirely by AWS-managed services
+-  **Serverless** - Powered by AWS-managed services
 -  **Fast, lightweight React frontend** with real-time data rendering
 -  **Global visitor tracking** with IP-based geolocation & visual mapping
 -  **Secure backend** with FastAPI, CORS handling, and request validation
